@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      height: 1500px; /* Just to make scrolling happen */
+      margin: 0;
+    }
+
+    .cool-div {
+      width: 200px;
+      height: 100px;
+      background-color: dodgerblue;
+      color: white;
+      padding: 10px;
+      position: relative;
+    }
+
+    .sticky {
+      position: fixed;
+      top: 0;
+    }
+
+    .stop-here {
+      margin-top: 1200px; /* Adjust as needed */
+      background-color: tomato;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div style="background-color: brown; height: 1000px; width: 100%;"></div>
+  <div class="cool-div" id="coolDiv">I'm so cool!</div>
+
+  <div class="stop-here">Stop! Collaborate and listen.</div>
+
+  <div style="background-color: brown; height: 4000px; width: 100%;"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+
+    startPosition = $('.cool-div').offset().top,
+    stopPosition = $('.stop-here').offset().top - $('.cool-div').outerHeight() - 120;
+
+    $(document).scroll(function () {
+    var y = $(this).scrollTop();
+
+    if (y > startPosition) {
+        $('.cool-div').addClass('sticky');
+        if (y > stopPosition) {
+            $('.cool-div').css('top', stopPosition - y);
+        } else {
+            $('.cool-div').css('top', 0);
+        }
+    } else {
+        $('.cool-div').removeClass('sticky');
+    } 
+});
+  </script>
+
+
+</body>
+</html>
